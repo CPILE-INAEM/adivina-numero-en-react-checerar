@@ -1,78 +1,68 @@
-import  './App.css'
-import { useState, useRef } from 'react'
-import MostrarMensaje from './MostrarMesaje'
-export default App
+iimport './App.css'
+import { useState, useRef, useEffect } from 'react'
+import MostrarMensaje from './MostrarMensaje'
 
 const randomNumber = () => Math.trunc(Math.random() * 20) + 1
-let number = ''
-
 
 function App() {
-//setSecretNumber(inputRef.current.value, () => { //funcion de callback, definida al final de una funcion, que hace que el codigo se ejecute una vez que la funcion se termina de ejecutar
-
-  // const [number, setNumber] = useState('')
   const [score, setScore] = useState(20)
+  const [number, setNumber] = useState('')
   const [highscore, setHighscore] = useState(0)
   const [secretNumber, setSecretNumber] = useState(randomNumber())
-  const inputRef  = useRef (null)
+  const inputRef = useRef(null)
 
+  const handleCheck = () => {
+    setNumber(Number(inputRef.current.value))
+  }
 
-const handleCheck = () => {
-  const number = Number(inputRef.current.value)
-  console.log('El numero secreto es ${secretNumber}')
-console.log('El numero introducido es ${number}')
-  if (number === secretNumber) {
-
-  //mnsaje has ganado
-  //mostrar el numero secreto HECHO
-  //si el score es mayor que el highscore, actualizar el highscore
-  
- 
-} else if (number > secretNumber) {
-  //mensaje es mas bajo
-  //disminuir el score
-  setScore(score - 1)
-} else if (number < secretNumber) {
-  //mensaje es mas alto
-  //disminuir el score
-  setScore(score - 1)
-}
-
-
-
-
-
+  useEffect(() => {
+    console.log(`El numero secreto es ${secretNumber}`)
+    console.log(`El numero ingresado es ${number}`)
+    if (number === secretNumber) {
+      // mensaje has ganado HECHO
+      // mostrar el numero secreto  HECHO
+      // cambiar el color de fondo
+      // si el score es mayor que el highscore, actualizar el highscore
+    } else if (score === 1) {
+      setScore(score - 1)
+      // mensaje perdiste
+      // cambio de color de fondo
+    } else {
+      // mensaje es mas bajo HECHO
+      // disminuir el score
+      setScore(score - 1)
+    }
+  }, [number])
 
   return (
     <div>
+      {console.log('Renderizando App')}
       <header>
-      <h1>Guess My Number!</h1>
-      <p className="between">(Between 1 and 20)</p>
-      <button className="btn again">Again!</button>
-      <div className="number">{number===secretNumber ? number : '?'}</div>
-    </header>
-    <main>
-      <section className="left">
-        <input type="number" className="guess" ref={inputRef}/>
-        <button className="btn check" onClick={handleCheck}>Check!</button>
-      </section>
-      <section className="right">
-        <MostrarMensaje number={number} secretNumber={secretNumber} />
-        
-        <p className="label-score">💯 Score: <span className="score">{score}</span></p>
-        <p className="label-highscore">
-          🥇 Highscore: <span className="highscore">{highscore}</span>
-        </p>
-      </section>
-    </main>
+        <h1>Guess My Number!</h1>
+        <p className="between">(Between 1 and 20)</p>
+        <button className="btn again">Again!</button>
+        <div className="number">{number === secretNumber ? number : '?'}</div>
+      </header>
+      <main>
+        <section className="left">
+          <input type="number" className="guess" ref={inputRef} />
+          <button className="btn check" onClick={handleCheck}>
+            Check!
+          </button>
+        </section>
+        <section className="right">
+          <MostrarMensaje number={number} secretNumber={secretNumber} />
+          <p className="label-score">
+            💯 Score: <span className="score">{score}</span>
+          </p>
+          <p className="label-highscore">
+            🥇 Highscore: <span className="highscore">{highscore}</span>
+          </p>
+        </section>
+      </main>
     </div>
   )
-
-
 }
 
-
-
-     
-
-}
+export default App
+Footer
