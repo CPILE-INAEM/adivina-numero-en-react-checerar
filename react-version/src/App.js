@@ -1,6 +1,7 @@
 import  './App.css'
 import { useState, useRef } from 'react'
-import MostrarMensaje from './MostrarMensaje'
+import MostrarMensaje from './MostrarMesaje'
+export default App
 
 const randomNumber = () => Math.trunc(Math.random() * 20) + 1
 let number = ''
@@ -11,7 +12,7 @@ function App() {
 
   // const [number, setNumber] = useState('')
   const [score, setScore] = useState(20)
-  //const [highscore, setHighscore] = useState(0)
+  const [highscore, setHighscore] = useState(0)
   const [secretNumber, setSecretNumber] = useState(randomNumber())
   const inputRef  = useRef (null)
 
@@ -26,9 +27,7 @@ console.log('El numero introducido es ${number}')
   //mostrar el numero secreto HECHO
   //si el score es mayor que el highscore, actualizar el highscore
   
-  setHighscore(Math.max(score, highscore))
-  setScore(20)
-  setSecretNumber(randomNumber())
+ 
 } else if (number > secretNumber) {
   //mensaje es mas bajo
   //disminuir el score
@@ -72,6 +71,8 @@ console.log('El numero introducido es ${number}')
 
 }
 
+
+
      
-export  default  App
+
 }
